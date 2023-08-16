@@ -33,3 +33,13 @@ app.post("/v1/tasks", (req, res) => {
     }
   );
 });
+
+app.get("/v1/tasks", (req, res) => {
+  db.query("SELECT * FROM tasks", (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
