@@ -44,13 +44,13 @@ app.get("/v1/tasks", (req, res) => {
   });
 });
 
-app.put("/v1/tasks", (req, res) => {
-  const id = req.body.id;
+app.put("/v1/tasks/:id", (req, res) => {
+  const id = req.params.id;
   const descripcion = req.body.descripcion;
 
   db.query(
-    "UPDATE tasks SET descripcion=? WHERE id=?",
-    [descripcion],
+    "UPDATE tasks SET descripcion=?, dateEdited= WHERE id=?",
+    [descripcion, dateEditedNow, id],
     (err, result) => {
       if (err) {
         console.log(err);
@@ -59,4 +59,16 @@ app.put("/v1/tasks", (req, res) => {
       }
     }
   );
+});
+
+app.delete("/v1/tasks/:id", (req, res) => {
+  const id = req.params.id;
+
+  db.query("DELETE FROM tasks WHERE id=?", id, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send("Task Deleted");
+    }
+  });
 });
