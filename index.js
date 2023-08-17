@@ -43,3 +43,20 @@ app.get("/v1/tasks", (req, res) => {
     }
   });
 });
+
+app.put("/v1/tasks", (req, res) => {
+  const id = req.body.id;
+  const descripcion = req.body.descripcion;
+
+  db.query(
+    "UPDATE tasks SET descripcion=? WHERE id=?",
+    [descripcion],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send("Task updated");
+      }
+    }
+  );
+});
