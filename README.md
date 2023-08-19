@@ -13,3 +13,7 @@ npm install
 ```
 npm start
 ```
+
+## Configuration of mysql:
+
+### Run the <span style="color:yellow">database.sql</span> script in MySql
